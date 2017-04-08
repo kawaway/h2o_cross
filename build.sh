@@ -28,8 +28,10 @@ h2o_make()
 	patch --forward -p1 < ../cross_mruby_path.patch
 	patch --forward -p1 < ../cross_libressl.patch
 	#patch --forward -p1 < ../O0.patch
-	#cmake -DWITH_MRUBY=on -DCMAKE_INSTALL_PREFIX=$SYSROOT .
-	cmake --debug-output --trace -DWITH_MRUBY=on -DCMAKE_INSTALL_PREFIX=$SYSROOT -DCMAKE_TOOLCHAIN_FILE=`pwd`/../linux-arm.cmake .
+	cmake -DWITH_MRUBY=on -DCMAKE_INSTALL_PREFIX=$SYSROOT -DCMAKE_TOOLCHAIN_FILE=`pwd`/../linux-arm.cmake .
+	# debug cmake
+	#cmake --debug-output --trace -DWITH_MRUBY=on -DCMAKE_INSTALL_PREFIX=$SYSROOT -DCMAKE_TOOLCHAIN_FILE=`pwd`/../linux-arm.cmake .
+
 	make
 	cd ..
 }
