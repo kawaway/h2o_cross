@@ -6,7 +6,6 @@ set(CMAKE_STAGING_PREFIX /home/data/target)
 
 set(tools /opt/rpi/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64)
 set(CMAKE_C_COMPILER ${tools}/bin/arm-linux-gnueabihf-gcc)
-#set(CMAKE_CXX_COMPILER ${tools}/bin/arm-linux-gnueabihf-g++)
 
 set(CMAKE_FIND_ROOT_PATH ${CMAKE_SYSROOT} ${CMAKE_STAGING_PREFIX})
 
