@@ -23,7 +23,7 @@ h2o_make()
 	fi
 
 	cd h2o
-	cp ../mruby_config_linux-arm.rb misc
+	patch --forward -p1 < ../cross_mruby.patch
 	patch --forward -p1 < ../cross_mruby-file-stat.patch
 	patch --forward -p1 < ../cross.patch
 	patch --forward -p1 < ../cross_libressl.patch
