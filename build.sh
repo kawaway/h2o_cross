@@ -59,7 +59,7 @@ zlib_clean()
 if [ "x$1" = "xclean" ]; then
 	h2o_clean
 else
-	#zlib_make
+	zlib_make
 	h2o_make
 	h2o_install
 fi
