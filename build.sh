@@ -32,7 +32,6 @@ h2o_make()
 	cmake --debug-output --trace -DWITH_MRUBY=on -DCMAKE_INSTALL_PREFIX=$SYSROOT -DCMAKE_TOOLCHAIN_FILE=`pwd`/../linux-arm.cmake .
 	make
 	cd ..
-	#h2o_install
 }
 
 h2o_clean(){
