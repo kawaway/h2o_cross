@@ -20,6 +20,7 @@ h2o_make()
 {
 	if [ ! -d h2o ]; then 
 		git clone https://github.com/h2o/h2o.git
+		git checkout -b v2.2.0 refs/tags/v2.2.0
 	fi
 
 	cd h2o
