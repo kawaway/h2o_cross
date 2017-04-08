@@ -25,7 +25,7 @@ h2o_make()
 	cd h2o
 	cp ../libressl_linux-arm.mk misc
 	cp ../mruby_config_linux-arm.rb misc
-	patch --forward -p1 < ../mruby-file-stat_cross.patch
+	patch --forward -p1 < ../cross_mruby-file-stat.patch
 	patch --forward -p1 < ../cross.patch
 	#patch --forward -p1 < ../O0.patch
 	#cmake -DWITH_MRUBY=on -DCMAKE_INSTALL_PREFIX=$SYSROOT .
