@@ -2,6 +2,11 @@
 
 SYSROOT=`pwd`/target
 
+CROSS=1
+if [ "x$1" = "xpclinux" ]; then
+	CROSS=0
+fi
+
 h2o_install()
 {
 	cd h2o
@@ -24,15 +29,19 @@ h2o_make()
 	fi
 
 	cd h2o
-	patch --forward -p1 < ../cross_mruby.patch
-	patch --forward -p1 < ../cross_mruby-file-stat.patch
-	patch --forward -p1 < ../cross_mruby_path.patch
-	patch --forward -p1 < ../cross_libressl.patch
-	#patch --forward -p1 < ../O0.patch
-	cmake -DWITH_MRUBY=on -DCMAKE_INSTALL_PREFIX=$SYSROOT -DCMAKE_TOOLCHAIN_FILE=`pwd`/../linux-arm.cmake .
-	# debug cmake
-	#cmake --debug-output --trace -DWITH_MRUBY=on -DCMAKE_INSTALL_PREFIX=$SYSROOT -DCMAKE_TOOLCHAIN_FILE=`pwd`/../linux-arm.cmake .
 
+	if [ $CROSS -eq 1 ]; then
+		patch --forward -p1 < ../cross_mruby.patch
+		patch --forward -p1 < ../cross_mruby-file-stat.patch
+		patch --forward -p1 < ../cross_mruby_path.patch
+		patch --forward -p1 < ../cross_libressl.patch
+		cmake -DWITH_MRUBY=on -DCMAKE_INSTALL_PREFIX=$SYSROOT -DCMAKE_TOOLCHAIN_FILE=`pwd`/../linux-arm.cmake .
+		# debug cmake
+		#cmake --debug-output --trace -DWITH_MRUBY=on -DCMAKE_INSTALL_PREFIX=$SYSROOT -DCMAKE_TOOLCHAIN_FILE=`pwd`/../linux-arm.cmake .
+	else # pclinux
+		cmake -DWITH_MRUBY=on -DCMAKE_INSTALL_PREFIX=$SYSROOT .
+	fi
+	#patch --forward -p1 < ../O0.patch
 	make
 	cd ..
 }
@@ -61,7 +70,7 @@ zlib_clean()
 if [ "x$1" = "xclean" ]; then
 	h2o_clean
 else
-	zlib_make
+	[ $CROSS -eq 1 ] && zlib_make
 	h2o_make
 	h2o_install
 fi
